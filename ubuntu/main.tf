@@ -9,17 +9,21 @@ data "aws_vpc" "default" {
 
 
 
-resource "aws_instance" "test_key" {
-  ami = "ami-008bcc0a51a849165"
+resource "aws_instance" "ubuntu" {
+  ami = "ami-05b5a865c3579bbc4"
   instance_type = "t2.micro"
   key_name      = "keys" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
+
+  tags = {
+    Name = "servidor-ubuntu_22_04"
+  }  
 
 }
 
 
 resource "aws_security_group" "mi_grupo_de_seguridad" {
-  name   = "host_nodo_awx"
+  name   = "ubuntu"
 
 
   ingress {
@@ -32,7 +36,7 @@ resource "aws_security_group" "mi_grupo_de_seguridad" {
 
   ingress {
     cidr_blocks = ["0.0.0.0/0"]
-    description = "Acceso al puerto "
+    description = "Acceso al puerto"
     from_port   = 80
     to_port     = 80
     protocol    = "TCP"
