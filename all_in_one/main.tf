@@ -7,7 +7,7 @@ resource "aws_instance" "instancia" {
 
   ami           = each.value
   instance_type = var.instance_type
-  key_name      = "keys_work" //nombre clave ssh
+  key_name      = "keys" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
 
   user_data = <<-EOF
