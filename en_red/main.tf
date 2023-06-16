@@ -21,7 +21,6 @@ resource "aws_instance" "instancia" {
   key_name = "keys" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
   subnet_id = data.aws_subnet.az_a.id
-  //associate_public_ip_address = true
 
   user_data = <<-EOF
     #!/bin/bash
