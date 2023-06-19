@@ -10,20 +10,20 @@ data "aws_vpc" "default" {
 
 
 resource "aws_instance" "rhel9" {
-  ami = "ami-0d767e966f3458eb5"
-  instance_type = "t2.micro"
-  key_name      = "keys" //nombre clave ssh
+  ami                    = "ami-0d767e966f3458eb5"
+  instance_type          = "t2.micro"
+  key_name               = "keys" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
 
   tags = {
     Name = "servidor-rhel9"
-  }  
+  }
 
 }
 
 
 resource "aws_security_group" "mi_grupo_de_seguridad" {
-  name   = "rhel"
+  name = "rhel"
 
 
   ingress {
