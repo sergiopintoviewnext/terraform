@@ -10,20 +10,20 @@ data "aws_vpc" "default" {
 
 
 resource "aws_instance" "debian" {
-  ami = "ami-0eeeb6788f77d3616"
-  instance_type = "t2.micro"
-  key_name      = "keys" //nombre clave ssh
+  ami                    = "ami-0eeeb6788f77d3616"
+  instance_type          = "t2.micro"
+  key_name               = "keys" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
 
   tags = {
     Name = "servidor-debian_11"
-  }  
+  }
 
 }
 
 
 resource "aws_security_group" "mi_grupo_de_seguridad" {
-  name   = "debian"
+  name = "debian"
 
 
   ingress {

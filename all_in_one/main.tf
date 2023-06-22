@@ -3,11 +3,11 @@ provider "aws" {
 }
 
 resource "aws_instance" "instancia" {
-  for_each      = var.instance_amis
+  for_each = var.instance_amis
 
-  ami           = each.value
-  instance_type = var.instance_type
-  key_name      = "keys" //nombre clave ssh
+  ami                    = each.value
+  instance_type          = var.instance_type
+  key_name               = "keys" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
 
   user_data = <<-EOF
@@ -17,7 +17,7 @@ resource "aws_instance" "instancia" {
 
   tags = {
     Name = each.key
-  } 
+  }
 }
 
 resource "aws_security_group" "mi_grupo_de_seguridad" {
