@@ -30,6 +30,6 @@ variable "list_ports" {
 
 
 variable "cidr" {
-  type     = string
+  type    = string
   default = "0.0.0.0/0"
 }

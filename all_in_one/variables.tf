@@ -18,3 +18,18 @@ variable "instance_amis" {
     rhel9  = "ami-0d767e966f3458eb5"
   }
 }
+
+
+variable "list_ports" {
+  type = map(string)
+  default = {
+    ssh  = "22"
+    http = "80"
+  }
+}
+
+
+variable "cidr" {
+  type    = string
+  default = "0.0.0.0/0"
+}
