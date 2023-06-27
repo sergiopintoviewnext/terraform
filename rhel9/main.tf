@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-3"
+  region = var.region
 }
 
 
@@ -8,12 +8,16 @@ data "aws_vpc" "default" {
 }
 
 
-
 resource "aws_instance" "rhel9" {
-  ami                    = "ami-0d767e966f3458eb5"
-  instance_type          = "t2.micro"
-  key_name               = "keys" //nombre clave ssh
+  ami                    = var.instance_espects.ami
+  instance_type          = var.instance_espects.type
+  key_name               = "keys_work" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
+
+  user_data = <<-EOF
+    #!/bin/bash
+    hostnamectl set-hostname aws-rhel
+    EOF
 
   tags = {
     Name = "servidor-rhel9"
@@ -23,23 +27,20 @@ resource "aws_instance" "rhel9" {
 
 
 resource "aws_security_group" "mi_grupo_de_seguridad" {
-  name = "rhel"
+
+  name = "sg_rhel"
 
 
-  ingress {
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "Acceso al puerto "
-    from_port   = 22
-    to_port     = 22
-    protocol    = "TCP"
-  }
+  dynamic "ingress" {
+    for_each = var.list_ports
 
-  ingress {
-    cidr_blocks = ["0.0.0.0/0"]
-    description = "Acceso al puerto"
-    from_port   = 80
-    to_port     = 80
-    protocol    = "TCP"
+    content {
+      description = "Permitir trafico ${ingress.key}"
+      from_port   = ingress.value
+      to_port     = ingress.value
+      protocol    = "tcp"
+      cidr_blocks = [var.cidr]
+    }
   }
 
   egress {
@@ -49,4 +50,13 @@ resource "aws_security_group" "mi_grupo_de_seguridad" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
+
+  ingress {
+    description = "Permitir ICMP"
+    from_port   = -1
+    to_port     = -1
+    protocol    = "icmp"
+    cidr_blocks = [var.cidr]
+  }
+
 }

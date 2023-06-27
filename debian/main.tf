@@ -8,7 +8,6 @@ data "aws_vpc" "default" {
 }
 
 
-
 resource "aws_instance" "debian" {
   ami                    = var.instance_espects.ami
   instance_type          = var.instance_espects.type
@@ -29,7 +28,7 @@ resource "aws_instance" "debian" {
 
 resource "aws_security_group" "mi_grupo_de_seguridad" {
 
-  name = "grupo_seguridad"
+  name = "sg_debian"
 
   dynamic "ingress" {
     for_each = var.list_ports
