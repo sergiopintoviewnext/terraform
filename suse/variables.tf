@@ -6,7 +6,7 @@ variable "region" {
 variable "instance_espects" {
   type = map(string)
   default = {
-    ami  = "ami-0d767e966f3458eb5"
+    ami  = "ami-01b305bdc62291ce1"
     type = "t2.micro"
   }
 }
