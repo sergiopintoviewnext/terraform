@@ -16,6 +16,7 @@ variable "instance_amis" {
     ubuntu = "ami-05b5a865c3579bbc4"
     debian = "ami-0eeeb6788f77d3616"
     rhel9  = "ami-0d767e966f3458eb5"
+    suse   = "ami-01b305bdc62291ce1"
   }
 }
 
