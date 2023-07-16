@@ -16,7 +16,7 @@ resource "aws_instance" "rhel9" {
 
   user_data = <<-EOF
     #!/bin/bash
-    hostnamectl set-hostname aws-rhel
+    hostnamectl set-hostname aws-rhel9
     EOF
 
   tags = {
