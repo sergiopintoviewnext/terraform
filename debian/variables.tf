@@ -8,6 +8,7 @@ variable "instance_espects" {
     default = {
         ami = "ami-0eeeb6788f77d3616"
         type = "t2.micro"
+        volume_size = "15"
     }   
 }
 
