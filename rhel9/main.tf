@@ -32,7 +32,7 @@ resource "aws_instance" "rhel9" {
 
 resource "aws_security_group" "mi_grupo_de_seguridad" {
 
-  name = "sg_rhel1"
+  name = "sg_rhel"
 
   dynamic "ingress" {
     for_each = var.list_ports
