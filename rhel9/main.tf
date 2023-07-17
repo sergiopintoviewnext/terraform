@@ -11,12 +11,12 @@ data "aws_vpc" "default" {
 resource "aws_instance" "rhel9" {
   ami                    = var.instance_espects.ami
   instance_type          = var.instance_espects.type
-  key_name               = "keys_work" //nombre clave ssh
+  key_name               = "mi_primer_servidor_keys" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
 
   root_block_device {
-      volume_size = var.instance_espects.volume_size
-    }  
+    volume_size = var.instance_espects.volume_size
+  }
 
   user_data = <<-EOF
     #!/bin/bash
@@ -32,7 +32,7 @@ resource "aws_instance" "rhel9" {
 
 resource "aws_security_group" "mi_grupo_de_seguridad" {
 
-  name = "sg_rhel"
+  name = "sg_rhel1"
 
   dynamic "ingress" {
     for_each = var.list_ports

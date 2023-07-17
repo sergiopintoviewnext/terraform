@@ -11,8 +11,8 @@ resource "aws_instance" "instancia" {
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
 
   root_block_device {
-      volume_size = var.volume_size
-    }  
+    volume_size = var.volume_size
+  }
 
   user_data = <<-EOF
     #!/bin/bash

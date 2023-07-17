@@ -1,14 +1,14 @@
 variable "region" {
-    type = string
-    default = "eu-west-3"
+  type    = string
+  default = "eu-west-3"
 }
 
 variable "instance_espects" {
-    type = map(string)
-    default = {
-        ami = "ami-0ec294f49d26f821e"
-        type = "t2.micro"
-    }   
+  type = map(string)
+  default = {
+    ami  = "ami-0ec294f49d26f821e"
+    type = "t2.micro"
+  }
 }
 
 variable "list_ports" {

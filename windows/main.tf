@@ -11,13 +11,17 @@ data "aws_vpc" "default" {
 resource "aws_instance" "windows" {
   ami                    = var.instance_espects.ami
   instance_type          = var.instance_espects.type
-  key_name               = "keys_work" //nombre clave ssh
+  key_name               = "mi_primer_servidor_keys" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
-  
-#   user_data = <<-EOF
-#     #!/bin/bash
-#     hostnamectl set-hostname aws-debian
-#     EOF
+
+  user_data = <<-EOF
+    <powershell>
+    Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+    Start-Service sshd
+    Set-Service -Name sshd -StartupType 'Automatic'
+    Set-Service -Name ssh-agent -StartupType 'Automatic'
+    </powershell>
+    EOF
 
   tags = {
     Name = "servidor-windows_2022"
