@@ -14,6 +14,10 @@ resource "aws_instance" "rhel9" {
   key_name               = "keys_work" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
 
+  root_block_device {
+      volume_size = var.instance_espects.volume_size
+    }  
+
   user_data = <<-EOF
     #!/bin/bash
     hostnamectl set-hostname aws-suse15
