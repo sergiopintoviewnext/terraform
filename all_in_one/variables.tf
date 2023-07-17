@@ -10,6 +10,12 @@ variable "instance_type" {
 }
 
 
+variable "volume_size" {
+  type    = string
+  default = "15"
+}
+
+
 variable "instance_amis" {
   type = map(string)
   default = {
