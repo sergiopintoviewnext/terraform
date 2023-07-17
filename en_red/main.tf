@@ -22,6 +22,10 @@ resource "aws_instance" "instancia" {
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
   subnet_id              = data.aws_subnet.az_a.id
 
+  root_block_device {
+      volume_size = var.volume_size
+    }
+
   user_data = <<-EOF
     #!/bin/bash
     hostnamectl set-hostname aws-${each.key}
