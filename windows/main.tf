@@ -41,6 +41,7 @@ resource "aws_instance" "windows" {
     Start-Service sshd
     Set-Service -Name sshd -StartupType 'Automatic'
     Set-Service -Name ssh-agent -StartupType 'Automatic'
+    Rename-Computer -NewName "AWS-WINDOWS" -Restart    
     </powershell>
     EOF
 
