@@ -14,9 +14,29 @@ resource "aws_instance" "windows" {
   key_name               = "mi_primer_servidor_keys" //nombre clave ssh
   vpc_security_group_ids = [aws_security_group.mi_grupo_de_seguridad.id]
 
+  connection {
+    type            = "ssh"
+    user            = var.user_data.user_name
+    password        = var.user_data.password
+    host            = self.public_ip
+    timeout         = "5m"
+    target_platform = "windows"
+  }
+
+  provisioner "file" {
+    source      = "script.ps1"
+    destination = "C:/script.ps1"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "powershell.exe -ExecutionPolicy Bypass -File C:/script.ps1"
+    ]
+  }
+
   user_data = <<-EOF
     <powershell>
-    net user Administrator ${var.password}
+    net user ${var.user_data.user_name} ${var.user_data.password}
     Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
     Start-Service sshd
     Set-Service -Name sshd -StartupType 'Automatic'

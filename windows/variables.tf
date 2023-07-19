@@ -14,11 +14,11 @@ variable "instance_espects" {
 variable "list_ports" {
   type = map(string)
   default = {
-    ssh   = "22"
-    http  = "80"
-    rdp   = "3389"
-    https = "443"
-    winrm = "5985"
+    ssh         = "22"
+    http        = "80"
+    rdp         = "3389"
+    https       = "443"
+    winrm       = "5985"
     winrm_https = "5986"
   }
 }
@@ -28,7 +28,10 @@ variable "cidr" {
   default = "0.0.0.0/0"
 }
 
-variable "password" {
-  type = string
-  default = "password1234"
+variable "user_data" {
+  type = map(string)
+  default = {
+    user_name = "user"
+    password  = "password1234"
+  }
 }
