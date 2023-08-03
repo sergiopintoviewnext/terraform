@@ -1,7 +1,7 @@
 output "ip_publica" {
-  value = aws_instance.rhel9.public_ip
+  value = aws_instance.rhel.public_ip
 }
 
 output "dns_publica" {
-  value = aws_instance.rhel9.public_dns
+  value = aws_instance.rhel.public_dns
 }
