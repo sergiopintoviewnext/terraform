@@ -8,7 +8,7 @@ data "aws_vpc" "default" {
 }
 
 
-resource "aws_instance" "rhel9" {
+resource "aws_instance" "suse" {
   ami                    = var.instance_espects.ami
   instance_type          = var.instance_espects.type
   key_name               = "keys_work" //nombre clave ssh
@@ -20,11 +20,11 @@ resource "aws_instance" "rhel9" {
 
   user_data = <<-EOF
     #!/bin/bash
-    hostnamectl set-hostname aws-suse15
+    hostnamectl set-hostname aws-suse
     EOF
 
   tags = {
-    Name = "servidor-suse15"
+    Name = "servidor-suse"
   }
 
 }
@@ -32,7 +32,7 @@ resource "aws_instance" "rhel9" {
 
 resource "aws_security_group" "mi_grupo_de_seguridad" {
 
-  name = "sg_suse15"
+  name = "sg_suse"
 
   dynamic "ingress" {
     for_each = var.list_ports
