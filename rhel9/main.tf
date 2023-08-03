@@ -8,7 +8,7 @@ data "aws_vpc" "default" {
 }
 
 
-resource "aws_instance" "rhel9" {
+resource "aws_instance" "rhel" {
   ami                    = var.instance_espects.ami
   instance_type          = var.instance_espects.type
   key_name               = "mi_primer_servidor_keys" //nombre clave ssh
@@ -20,11 +20,11 @@ resource "aws_instance" "rhel9" {
 
   user_data = <<-EOF
     #!/bin/bash
-    hostnamectl set-hostname aws-rhel9
+    hostnamectl set-hostname aws-rhel
     EOF
 
   tags = {
-    Name = "servidor-rhel9"
+    Name = "servidor-rhel"
   }
 
 }
